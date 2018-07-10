@@ -1,0 +1,44 @@
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
+public class Tourist {
+
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		File input = new File(args[0]);
+		BufferedReader reader = new BufferedReader(new FileReader(input));
+		
+		int numCampuses = Integer.parseInt(reader.readLine());
+		for (int i = 0; i < numCampuses; i++) {
+			String campusInfo = reader.readLine();
+			String[] campusInfoArray = campusInfo.split(" ");
+			//num attractions
+			int n = Integer.parseInt(campusInfoArray[0]);
+			//num attractions in 1 visit
+			int k = Integer.parseInt(campusInfoArray[1]);
+			//num of visit
+			double v = Double.parseDouble(campusInfoArray[2]);
+			
+			int firstAttIndex = (int) ((k * (v-1)) % n);
+			int wrapRemainder = firstAttIndex + k - n;
+			
+			System.out.print("Case #" + (i + 1) + ":");
+			boolean firstPrinted = false;
+			for (int j = 0; j < n; j++) {
+				
+				if (j < wrapRemainder || j >= firstAttIndex) {
+					System.out.print(" ");
+					System.out.print(reader.readLine());
+				} else {
+					reader.readLine();
+				}
+			}
+			System.out.print("\n");
+			
+		}
+
+	}
+
+}
